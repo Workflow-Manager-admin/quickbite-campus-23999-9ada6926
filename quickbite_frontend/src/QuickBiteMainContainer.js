@@ -998,56 +998,56 @@ function QuickBiteMainContainer() {
           display: flex;
           flex-direction: column;
         }
-        .qbc-navbar {
+        .qbc-header {
           background: #FFC107;
           color: #222;
-          padding: 0 0 0 0;
-          font-size: 1.18rem;
-          font-weight: 700;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          letter-spacing: 0.02em;
           box-shadow: 0 2px 6px rgba(0,0,0,0.04);
           position: sticky;
           top: 0;
           z-index: 99;
-          height: 74px;
+          padding: 0;
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
-        .qbc-logo {
-          margin-left: 24px;
-          font-size: 1.32rem;
-          letter-spacing: 0.01em;
+        .qbc-main-title {
+          margin: 0;
+          padding-top: 30px;
+          font-size: 2.7rem;
           font-weight: 800;
+          letter-spacing: 0.01em;
           color: #222;
         }
         .qbc-nav-tabs {
+          margin: 19px 0 -2px 0;
           display: flex;
-          align-items: end;
-          height: 100%;
-          gap: 1px;
+          flex-direction: row;
+          justify-content: center;
+          gap: 0;
         }
         .qbc-nav-tab {
           background: transparent;
           border: none;
-          font-size: 1rem;
+          font-size: 1.08rem;
           font-weight: 600;
           color: #222;
-          padding: 20px 22px 12px 22px;
-          border-bottom: 5px solid transparent;
+          padding: 13px 32px 9px 32px;
+          border-bottom: 4px solid transparent;
           margin: 0;
           transition: border-bottom 0.18s, color 0.17s, background 0.12s;
           cursor: pointer;
           border-radius: 0;
+          outline: none;
         }
         .qbc-nav-tab.active, .qbc-nav-tab:hover {
-          border-bottom: 5px solid #FF7043;
+          border-bottom: 4px solid #FF7043;
           color: #FF7043;
-          background: rgba(255,193,7,0.08);
+          background: rgba(255,193,7,0.10);
         }
         .qbc-tagline {
-          margin-right: 24px;
-          font-size: 0.99rem;
+          margin: 12px 0 8px 0;
+          font-size: 1.02rem;
           color: #886006;
           font-weight: 500;
           letter-spacing: 0.01em;
