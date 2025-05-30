@@ -575,9 +575,10 @@ function QuickBiteMainContainer() {
 
 /**
  * Recipe Card Component
- * @param {object} props - title, ingredient count, tags array (NO IMAGE)
+ * @param {object} props - title, ingredient count, tags array, steps array (NO IMAGE)
  */
-function RecipeCard({ title, ingredients, tags }) {
+// PUBLIC_INTERFACE
+function RecipeCard({ title, ingredients, tags, steps }) {
   return (
     <div className="qbc-card">
       <div className="qbc-card-body">
@@ -588,7 +589,44 @@ function RecipeCard({ title, ingredients, tags }) {
             <span key={tag} className={`qbc-tag ${tag.replace(/\s+/g, '-').toLowerCase()}`}>{tag}</span>
           )}
         </div>
+        {/* Step-by-step procedure */}
+        {steps && steps.length > 0 && (
+          <div className="qbc-card-steps-section">
+            <div className="qbc-card-steps-label">Preparation Steps:</div>
+            <ol className="qbc-card-steps-list">
+              {steps.map((step, i) => (
+                <li key={i} className="qbc-card-step-item">{step}</li>
+              ))}
+            </ol>
+          </div>
+        )}
       </div>
+      {/* Inline styles specific for steps UI in card (yellow theme, ordered clarity) */}
+      <style>{`
+        .qbc-card-steps-section {
+          margin-top: 20px;
+          background: #FFFDE1;
+          border-radius: 10px;
+          padding: 13px 16px;
+          font-size: 0.97rem;
+          color: #886006;
+          box-shadow: 0 1px 2px #ffd76b33;
+        }
+        .qbc-card-steps-label {
+          font-weight: 600;
+          color: #FFC107;
+          margin-bottom: 6px;
+          font-size: 1.01rem;
+        }
+        .qbc-card-steps-list {
+          margin: 0;
+          padding-left: 23px;
+        }
+        .qbc-card-step-item {
+          margin-bottom: 9px;
+          line-height: 1.44;
+        }
+      `}</style>
     </div>
   );
 }
