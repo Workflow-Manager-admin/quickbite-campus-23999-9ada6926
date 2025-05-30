@@ -191,7 +191,7 @@ function QuickBiteMainContainer() {
     <div className="qbc-root">
       {/* Horizontal navbar with tabs */}
       <nav className="qbc-navbar">
-        <div className="qbc-logo">QuickBite Campus</div>
+        <div className="qbc-logo">Bachelors Cooking</div>
         <div className="qbc-nav-tabs">
           {SECTIONS.map(section =>
             <button
@@ -272,7 +272,7 @@ function QuickBiteMainContainer() {
         </section>
       </div>
       <footer className="qbc-footer">
-        <span>QuickBite Campus &copy; {new Date().getFullYear()} &mdash; Eat smart, live well.</span>
+        <span>Bachelors Cooking &copy; {new Date().getFullYear()} &mdash; Eat smart, live well.</span>
       </footer>
 
       {/* Inline CSS for this component */}
