@@ -1348,17 +1348,7 @@ function RecipeDetailsModal({ recipe, open, onClose }) {
           }}
           title="Close"
         >×</button>
-        {recipe.image && (
-          <img src={recipe.image}
-            alt={recipe.title}
-            style={{
-              width: "100%",
-              height: 128,
-              objectFit: "cover",
-              borderRadius: 8,
-              marginBottom: 16
-            }} />
-        )}
+        {/* No image shown here */}
         <div style={{ fontWeight: 700, fontSize: 21, color: COLORS.primary, marginBottom: 3 }}>
           {recipe.title}
         </div>
