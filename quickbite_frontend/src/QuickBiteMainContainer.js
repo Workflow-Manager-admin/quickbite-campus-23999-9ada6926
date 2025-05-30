@@ -7,10 +7,11 @@ import React, { useState } from 'react';
  */
 
 /*
- * Dummy recipe data for demonstration (NO IMAGES)
- * Now includes a `steps` property for step-by-step recipe instructions.
-*/
+ * Expanded recipe data - 15 recipes for each main section (total: 60 recipes)
+ * Each contains: title, ingredient count, quick tags, and detailed steps (NO IMAGES)
+ */
 const DEMO_RECIPES = [
+  // 5-Ingredient Recipes (<=5 ingredients, general crowd-pleasers)
   {
     id: 1,
     title: "Avocado Toast Deluxe",
@@ -75,6 +76,680 @@ const DEMO_RECIPES = [
       "Cook until veggies are just tender. Serve with rice or noodles."
     ]
   },
+  {
+    id: 6,
+    title: "Peanut Butter Banana Wrap",
+    ingredients: 3,
+    tags: ["vegetarian", "quick"],
+    steps: [
+      "Lay a tortilla flat and spread peanut butter evenly over it.",
+      "Place a peeled banana at one edge and roll the tortilla up tightly.",
+      "Slice into rounds or eat whole."
+    ]
+  },
+  {
+    id: 7,
+    title: "Easy Tuna Melt",
+    ingredients: 5,
+    tags: ["student", "protein-packed"],
+    steps: [
+      "Mix canned tuna with mayo, a little mustard, and pepper.",
+      "Spread tuna mixture onto bread slices.",
+      "Top with cheese and another bread slice.",
+      "Toast in a pan or sandwich maker until golden and cheese melts."
+    ]
+  },
+  {
+    id: 8,
+    title: "Mug Omelette",
+    ingredients: 4,
+    tags: ["breakfast", "budget"],
+    steps: [
+      "Crack two eggs into a mug, add milk, salt, and pepper.",
+      "Add diced veggies or ham if available.",
+      "Mix well with a fork.",
+      "Microwave for 1-2 minutes, stirring halfway until set."
+    ]
+  },
+  {
+    id: 9,
+    title: "Quick Greek Salad",
+    ingredients: 5,
+    tags: ["vegetarian", "gluten-free"],
+    steps: [
+      "Chop cucumber, tomato, and onion.",
+      "Toss in a bowl with olives and feta cheese.",
+      "Drizzle with olive oil and a little vinegar.",
+      "Add salt, pepper, and dried oregano; toss again to serve."
+    ]
+  },
+  {
+    id: 10,
+    title: "No-Cook Overnight Oats",
+    ingredients: 5,
+    tags: ["vegan", "breakfast"],
+    steps: [
+      "Mix rolled oats, non-dairy milk, a little maple syrup, and chia seeds in a jar.",
+      "Stir well.",
+      "Top with sliced fruit or berries.",
+      "Refrigerate overnight and grab in the morning."
+    ]
+  },
+  {
+    id: 11,
+    title: "Parmesan Zucchini Fries",
+    ingredients: 5,
+    tags: ["vegetarian", "snack"],
+    steps: [
+      "Cut zucchini into thick fries.",
+      "Toss with olive oil and grated parmesan.",
+      "Spread on a baking sheet in a single layer.",
+      "Bake at 425°F for 15-20 mins, flipping halfway, until golden.",
+      "Sprinkle with additional parmesan before serving."
+    ]
+  },
+  {
+    id: 12,
+    title: "Spicy Black Bean Quesadilla",
+    ingredients: 5,
+    tags: ["vegetarian", "budget"],
+    steps: [
+      "Mash canned black beans and mix with chopped jalapeno.",
+      "Spread mixture over half a tortilla, sprinkle with cheese.",
+      "Fold, toast in a pan until golden, then cut into wedges."
+    ]
+  },
+  {
+    id: 13,
+    title: "Chickpea-Peanut Curry",
+    ingredients: 5,
+    tags: ["vegan", "student"],
+    steps: [
+      "Sauté chopped onion until translucent.",
+      "Add drained chickpeas and curry powder.",
+      "Pour in coconut milk and simmer gently.",
+      "Stir in peanut butter, cook until thickened.",
+      "Serve with rice or flatbread."
+    ]
+  },
+  {
+    id: 14,
+    title: "Honey Mustard Chicken Bake",
+    ingredients: 5,
+    tags: ["student", "protein-packed"],
+    steps: [
+      "Arrange chicken breasts in a baking dish.",
+      "Mix together honey and mustard, pour over chicken.",
+      "Sprinkle with salt and pepper.",
+      "Bake at 400°F (200°C) for 25-30 minutes until cooked through."
+    ]
+  },
+  {
+    id: 15,
+    title: "Simple Caprese Salad",
+    ingredients: 4,
+    tags: ["vegetarian", "quick"],
+    steps: [
+      "Slice fresh mozzarella and tomatoes.",
+      "Layer with basil leaves on a plate.",
+      "Drizzle with olive oil and balsamic vinegar.",
+      "Season with salt and pepper, and serve."
+    ]
+  },
+
+  // Student Meals (budget, quick, filling, not always minimal ingredients)
+  {
+    id: 16,
+    title: "BBQ Chicken & Rice Bowl",
+    ingredients: 7,
+    tags: ["student", "budget"],
+    steps: [
+      "Cook rice according to package instructions.",
+      "Grill or pan-cook chicken strips.",
+      "Toss chicken in bottled BBQ sauce.",
+      "Serve chicken over rice with canned corn and black beans.",
+      "Top with green onions and shredded cheese."
+    ]
+  },
+  {
+    id: 17,
+    title: "Dorm Mac & Cheese",
+    ingredients: 6,
+    tags: ["student", "budget"],
+    steps: [
+      "Boil macaroni according to package directions.",
+      "Drain and return to pot.",
+      "Stir in butter and milk until thick.",
+      "Add shredded cheese and stir until melted.",
+      "Season with black pepper."
+    ]
+  },
+  {
+    id: 18,
+    title: "Budget Taco Skillet",
+    ingredients: 7,
+    tags: ["student", "quick"],
+    steps: [
+      "Cook ground beef in a skillet until browned.",
+      "Stir in taco seasoning and a little water.",
+      "Add canned corn and drained black beans.",
+      "Top with crushed tortilla chips and cheese.",
+      "Broil briefly for a crisp topping."
+    ]
+  },
+  {
+    id: 19,
+    title: "Pita Pizza",
+    ingredients: 5,
+    tags: ["student", "quick"],
+    steps: [
+      "Preheat oven to 425°F (220°C).",
+      "Spread pizza sauce over pita breads.",
+      "Top with shredded cheese and favorite toppings.",
+      "Bake 8-10 minutes until bubbly.",
+      "Slice and enjoy."
+    ]
+  },
+  {
+    id: 20,
+    title: "Chili Cheese Toast",
+    ingredients: 5,
+    tags: ["student", "vegetarian"],
+    steps: [
+      "Toast thick bread slices lightly.",
+      "Spread canned vegetarian chili over toast.",
+      "Top with shredded cheese.",
+      "Broil until cheese melts and bubbles.",
+      "Sprinkle with green onion."
+    ]
+  },
+  {
+    id: 21,
+    title: "Classic Ramen Noodle Soup",
+    ingredients: 6,
+    tags: ["student", "budget"],
+    steps: [
+      "Boil water and cook ramen noodles.",
+      "Add seasoning packet to taste.",
+      "Drop in sliced carrots and spinach while cooking.",
+      "Top with a soft-boiled egg, if desired."
+    ]
+  },
+  {
+    id: 22,
+    title: "Cheesy Broccoli Rice Casserole",
+    ingredients: 7,
+    tags: ["student", "vegetarian"],
+    steps: [
+      "Cook instant rice following package directions.",
+      "Steam or microwave broccoli until just tender.",
+      "Combine with cheese and a little milk in a baking dish.",
+      "Season, then bake until cheese is bubbly."
+    ]
+  },
+  {
+    id: 23,
+    title: "Sweetcorn Fritters",
+    ingredients: 7,
+    tags: ["vegetarian", "budget"],
+    steps: [
+      "Mix canned corn, eggs, flour, green onions, a pinch of salt and pepper.",
+      "Heat oil in skillet, drop spoonfuls of batter.",
+      "Fry until golden, flip and finish frying on the other side."
+    ]
+  },
+  {
+    id: 24,
+    title: "Fast BBQ Bean Wrap",
+    ingredients: 5,
+    tags: ["vegan", "budget"],
+    steps: [
+      "Warm tortilla wraps.",
+      "Spread baked beans in BBQ sauce on each wrap.",
+      "Add lettuce or spinach.",
+      "Roll up and eat."
+    ]
+  },
+  {
+    id: 25,
+    title: "Egg Drop Soup",
+    ingredients: 5,
+    tags: ["gluten-free", "student"],
+    steps: [
+      "Bring broth to a simmer in a saucepan.",
+      "In a bowl, beat eggs lightly.",
+      "Slowly drizzle eggs into simmering broth, stirring gently.",
+      "Add sliced green onions and season with pepper.",
+      "Serve hot."
+    ]
+  },
+  {
+    id: 26,
+    title: "Tuna Pasta Salad",
+    ingredients: 6,
+    tags: ["student", "protein-packed"],
+    steps: [
+      "Cook pasta, then cool under cold water.",
+      "Mix with canned tuna, mayo, diced veggies, and salt & pepper.",
+      "Chill before serving."
+    ]
+  },
+  {
+    id: 27,
+    title: "Thai Peanut Instant Noodles",
+    ingredients: 6,
+    tags: ["student", "quick"],
+    steps: [
+      "Prepare instant noodles as directed, omitting flavor packet.",
+      "In a bowl, mix peanut butter, soy sauce, and chili flakes.",
+      "Drain noodles, toss in sauce with sliced green onion.",
+      "Top with chopped peanuts if desired."
+    ]
+  },
+  {
+    id: 28,
+    title: "Breakfast Burrito",
+    ingredients: 7,
+    tags: ["student", "breakfast"],
+    steps: [
+      "Scramble eggs in a skillet.",
+      "Warm tortillas.",
+      "Fill with eggs, cheese, salsa, and any leftover veggies or beans.",
+      "Roll up and serve hot."
+    ]
+  },
+  {
+    id: 29,
+    title: "Rice & Bean Burrito Bowl",
+    ingredients: 6,
+    tags: ["vegan", "budget"],
+    steps: [
+      "Cook rice and season with a pinch salt.",
+      "Add drained canned beans, corn, and salsa.",
+      "Top with shredded lettuce and chopped tomato."
+    ]
+  },
+  {
+    id: 30,
+    title: "Cheesy Veggie Scramble",
+    ingredients: 5,
+    tags: ["vegetarian", "breakfast"],
+    steps: [
+      "Whisk eggs and season with salt and pepper.",
+      "Cook in a skillet with chopped veggies.",
+      "Add cheese, fold, and serve hot."
+    ]
+  },
+
+  // Vegan & Plant-Based Galaxy (15 unique, varied protein/focus)
+  {
+    id: 31,
+    title: "Lentil Shepherd's Pie",
+    ingredients: 8,
+    tags: ["vegan", "protein-packed"],
+    steps: [
+      "Cook lentils in vegetable broth until tender.",
+      "Sauté onion, carrot, and celery until soft.",
+      "Combine with tomatoes and cooked lentils.",
+      "Spread mixture in baking dish, top with mashed potatoes.",
+      "Bake until golden and heated through."
+    ]
+  },
+  {
+    id: 32,
+    title: "Spicy Peanut Noodle Bowl",
+    ingredients: 7,
+    tags: ["vegan", "quick"],
+    steps: [
+      "Boil noodles per package directions.",
+      "Mix peanut butter, soy sauce, chili paste, and lime juice for sauce.",
+      "Toss noodles and sauce together with shredded carrots.",
+      "Top with green onion and sesame seeds."
+    ]
+  },
+  {
+    id: 33,
+    title: "Simple Tofu Curry",
+    ingredients: 7,
+    tags: ["vegan", "gluten-free"],
+    steps: [
+      "Cube tofu and pan-fry until golden.",
+      "Sauté onion with curry paste.",
+      "Add coconut milk and veggies, simmer.",
+      "Add tofu at the end and heat through."
+    ]
+  },
+  {
+    id: 34,
+    title: "Black Bean Mango Salsa Bowl",
+    ingredients: 8,
+    tags: ["vegan", "high-fiber"],
+    steps: [
+      "Dice mango, red onion, and mix with black beans.",
+      "Add corn, chopped bell pepper, and cilantro.",
+      "Toss with lime juice, salt, and pepper.",
+      "Serve with rice or tortilla chips."
+    ]
+  },
+  {
+    id: 35,
+    title: "Quinoa Chickpea Salad",
+    ingredients: 6,
+    tags: ["vegan", "protein-packed"],
+    steps: [
+      "Cook quinoa per package directions and cool.",
+      "Mix with canned chickpeas, chopped cucumber and tomato.",
+      "Toss with lemon juice, olive oil, salt, and pepper."
+    ]
+  },
+  {
+    id: 36,
+    title: "Lentil & Spinach Soup",
+    ingredients: 7,
+    tags: ["vegan", "gluten-free"],
+    steps: [
+      "Sauté onion and garlic.",
+      "Add carrots and celery.",
+      "Add lentils and vegetable broth, simmer until lentils are tender.",
+      "Stir in spinach until wilted.",
+      "Season with lemon and pepper."
+    ]
+  },
+  {
+    id: 37,
+    title: "Baked Falafel Pita",
+    ingredients: 8,
+    tags: ["vegan", "meal-prep"],
+    steps: [
+      "Blend canned chickpeas, onion, garlic, and spices.",
+      "Form patties and bake until golden.",
+      "Stuff in pita with lettuce, tomato, and tahini sauce."
+    ]
+  },
+  {
+    id: 38,
+    title: "Chickpea Tuna Sandwich",
+    ingredients: 6,
+    tags: ["vegan", "quick"],
+    steps: [
+      "Mash chickpeas with vegan mayo, mustard, and relish.",
+      "Add diced celery and onion.",
+      "Spread on bread or crackers."
+    ]
+  },
+  {
+    id: 39,
+    title: "BBQ Jackfruit Sliders",
+    ingredients: 7,
+    tags: ["vegan", "student"],
+    steps: [
+      "Drain canned jackfruit, shred with forks.",
+      "Sauté briefly and add BBQ sauce.",
+      "Serve in slider buns with cabbage slaw."
+    ]
+  },
+  {
+    id: 40,
+    title: "Southwest Sweet Potato Bowl",
+    ingredients: 7,
+    tags: ["vegan", "gluten-free"],
+    steps: [
+      "Roast cubed sweet potato until tender.",
+      "Serve over rice with black beans, corn, and salsa.",
+      "Top with avocado and cilantro."
+    ]
+  },
+  {
+    id: 41,
+    title: "Vegan Chickpea 'Egg' Salad",
+    ingredients: 6,
+    tags: ["vegan", "quick"],
+    steps: [
+      "Mash chickpeas in a bowl.",
+      "Add vegan mayo, mustard, diced celery, and green onion.",
+      "Season with black salt (kala namak) for 'egg' flavor.",
+      "Serve on breads or lettuce."
+    ]
+  },
+  {
+    id: 42,
+    title: "Seitan Stir-fry",
+    ingredients: 7,
+    tags: ["vegan", "protein-packed"],
+    steps: [
+      "Slice seitan and sauté in skillet.",
+      "Add chopped broccoli, peppers, and carrots.",
+      "Stir-fry with soy sauce and a splash of sesame oil.",
+      "Serve with rice."
+    ]
+  },
+  {
+    id: 43,
+    title: "Edamame Hummus Dip",
+    ingredients: 6,
+    tags: ["vegan", "snack"],
+    steps: [
+      "Blend cooked edamame, lemon juice, tahini, garlic, salt, and olive oil.",
+      "Serve with veggie sticks or pita chips."
+    ]
+  },
+  {
+    id: 44,
+    title: "White Bean Avocado Toast",
+    ingredients: 5,
+    tags: ["vegan", "quick"],
+    steps: [
+      "Toast bread of choice.",
+      "Mash white beans with avocado, lemon juice, salt, and chili flakes.",
+      "Spread on toast. Top with herbs."
+    ]
+  },
+  {
+    id: 45,
+    title: "Tofu & Broccoli Sheet Pan Dinner",
+    ingredients: 7,
+    tags: ["vegan", "meal-prep"],
+    steps: [
+      "Cube tofu and chop broccoli.",
+      "Toss with olive oil, garlic powder, and soy sauce.",
+      "Roast on sheet pan at 425°F for 20 min.",
+      "Serve with brown rice or quinoa."
+    ]
+  },
+
+  // Build-a-Recipe (examples to help guide the 'wizard'; shown if needed for search)
+  {
+    id: 46,
+    title: "Custom Protein Power Bowl",
+    ingredients: 5,
+    tags: ["student", "build-a-recipe"],
+    steps: [
+      "Choose a cooked base (pasta, rice, bread, or tortilla).",
+      "Add selected protein (egg, chickpeas, tofu, chicken, or beans).",
+      "Toss in any available and preferred veggies.",
+      "Drizzle with sauce of choice.",
+      "Serve warm in a bowl or plate."
+    ]
+  },
+  {
+    id: 47,
+    title: "Veggie-Loaded Sandwich",
+    ingredients: 6,
+    tags: ["vegetarian", "build-a-recipe"],
+    steps: [
+      "Pick a bread type (slice, focaccia, pita, etc.).",
+      "Spread with hummus or cream cheese.",
+      "Layer with selected veggies (lettuce, tomato, carrot, cucumber).",
+      "Add protein if desired (eggs, beans).",
+      "Close sandwich and slice."
+    ]
+  },
+  {
+    id: 48,
+    title: "Quick Wrap It Up",
+    ingredients: 4,
+    tags: ["vegan", "build-a-recipe"],
+    steps: [
+      "Take a tortilla or flatbread.",
+      "Spread with sauce or dip.",
+      "Add cooked or raw veggies and a protein.",
+      "Roll tightly and slice to eat."
+    ]
+  },
+  {
+    id: 49,
+    title: "Rice Bowl Adventure",
+    ingredients: 6,
+    tags: ["student", "build-a-recipe"],
+    steps: [
+      "Fill a bowl with cooked rice.",
+      "Add a protein (tofu, beans, chicken, or egg).",
+      "Top with veggies (fresh, steamed, or roasted).",
+      "Drizzle generous sauce or salsa over.",
+      "Mix well before eating."
+    ]
+  },
+  {
+    id: 50,
+    title: "Ultimate Pasta Mix",
+    ingredients: 6,
+    tags: ["vegetarian", "build-a-recipe"],
+    steps: [
+      "Boil pasta until al dente.",
+      "Stir in pesto or sauce of choice.",
+      "Add protein (beans, shredded chicken, tofu, etc.).",
+      "Throw in leftover cooked or raw veggies.",
+      "Top with cheese or nutritional yeast if desired."
+    ]
+  },
+  {
+    id: 51,
+    title: "Breakfast Bowl Formula",
+    ingredients: 5,
+    tags: ["breakfast", "build-a-recipe"],
+    steps: [
+      "Pick a base (oats, toast, tortilla, potato hash).",
+      "Add eggs, tofu, or yogurt.",
+      "Toss in fruit, veggies, or both.",
+      "Drizzle with honey, hot sauce, or nut butter.",
+      "Garnish with seeds or herbs."
+    ]
+  },
+  {
+    id: 52,
+    title: "Hearty Salad Maker",
+    ingredients: 5,
+    tags: ["vegan", "build-a-recipe"],
+    steps: [
+      "Choose a leafy base (spinach, lettuce, kale, arugula).",
+      "Add protein like chickpeas, beans, chicken, or tofu.",
+      "Pile on various chopped veggies.",
+      "Top with nuts, seeds, or croutons.",
+      "Dress with vinaigrette or your favorite sauce."
+    ]
+  },
+  {
+    id: 53,
+    title: "DIY Nacho Plate",
+    ingredients: 6,
+    tags: ["student", "build-a-recipe"],
+    steps: [
+      "Layer tortilla chips on a plate.",
+      "Scatter your protein pick (beans, ground beef, or tofu).",
+      "Sprinkle on toppings (onions, jalapeno, corn).",
+      "Drizzle with cheese or vegan cheese sauce.",
+      "Microwave until melted, serve with salsa & sour cream."
+    ]
+  },
+  {
+    id: 54,
+    title: "Super Simple Flatbread Pizza",
+    ingredients: 5,
+    tags: ["vegetarian", "build-a-recipe"],
+    steps: [
+      "Spread tomato sauce on flatbread or naan.",
+      "Add cheese, cooked veggies, or deli meat/chickpeas.",
+      "Top with fresh herbs or greens.",
+      "Bake at 425°F until cheese is bubbly and bread crisp."
+    ]
+  },
+  {
+    id: 55,
+    title: "Instant Stir-Fry",
+    ingredients: 5,
+    tags: ["vegan", "build-a-recipe"],
+    steps: [
+      "Heat oil in a pan.",
+      "Add chopped veggies and protein of choice.",
+      "Sauté for 5-7 minutes.",
+      "Pour in sauce, tossing to coat.",
+      "Serve over rice or noodles."
+    ]
+  },
+  {
+    id: 56,
+    title: "Eggs-Your-Way Breakfast",
+    ingredients: 4,
+    tags: ["breakfast", "build-a-recipe"],
+    steps: [
+      "Decide: Boiled, scrambled, or fried eggs.",
+      "Choose bread/rice as a side.",
+      "Add veggies or cheeses as desired.",
+      "Serve assembled together."
+    ]
+  },
+  {
+    id: 57,
+    title: "DIY Buddha Bowl",
+    ingredients: 7,
+    tags: ["vegan", "build-a-recipe"],
+    steps: [
+      "Start with a grain (rice, barley, quinoa, couscous).",
+      "Add at least one protein.",
+      "Top with at least three veggies (cooked or raw).",
+      "Include a sauce/dressing and a crunchy topping.",
+      "Arrange beautifully, drizzle, and dig in."
+    ]
+  },
+  {
+    id: 58,
+    title: "Mega Soup Mixer",
+    ingredients: 6,
+    tags: ["student", "build-a-recipe"],
+    steps: [
+      "Heat broth in a pot.",
+      "Add vegetables (fresh or frozen) and bring to a simmer.",
+      "Stir in a protein pick (lentils, tofu, chicken, beans).",
+      "Simmer together 10-15 minutes.",
+      "Season & serve."
+    ]
+  },
+  {
+    id: 59,
+    title: "Sandwich Builder",
+    ingredients: 5,
+    tags: ["vegetarian", "build-a-recipe"],
+    steps: [
+      "Slice bread of your choice.",
+      "Choose a spread (hummus, mayo, mustard, nut butter).",
+      "Select protein (tofu, cheese, eggs, beans).",
+      "Add veggies (lettuce, tomato, cucumber, pickles).",
+      "Assemble in layers and slice."
+    ]
+  },
+  {
+    id: 60,
+    title: "Pasta Salad Express",
+    ingredients: 7,
+    tags: ["vegan", "build-a-recipe"],
+    steps: [
+      "Cook and cool short pasta.",
+      "Add protein (beans, chickpeas, tofu).",
+      "Toss with chopped veggies.",
+      "Add olives or nuts if available.",
+      "Coat with vinaigrette and toss to serve."
+    ]
+  }
 ];
 
 // Section definitions
@@ -110,6 +785,7 @@ function QuickBiteMainContainer() {
     if (activeSection === "vegan") {
       return recipe.tags.includes("vegan") && titleMatch;
     }
+    // for 'build', don't show cards (wizard instead)
     return false;
   });
 
