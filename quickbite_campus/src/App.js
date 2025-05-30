@@ -481,12 +481,62 @@ function Tabs({ sections, current, onTabChange }) {
   );
 }
 
-// Main App
-// PUBLIC_INTERFACE
+/**
+ * PUBLIC_INTERFACE
+ * App: Bachelor Cooking main container with yellow theme, top-aligned columns, and updated title.
+ */
 function App() {
   // Track current section/tab, and search bar state
   const [tab, setTab] = useState("fiveIngredient");
   const [search, setSearch] = useState('');
+
+  // Top section columns structure
+  const sectionColumns = [
+    {
+      key: "fiveIngredient",
+      title: "5-Ingredient Recipes",
+      subtitle: "Simple meals, max flavor, minimal effort.",
+      description: "Delicious dishes with just five ingredients.",
+      action: (
+        <button className="btn" onClick={() => setTab("fiveIngredient")}>
+          View Recipes
+        </button>
+      )
+    },
+    {
+      key: "studentMeals",
+      title: "Student Meals",
+      subtitle: "Budget-friendly, quick, and made for students.",
+      description: "Tasty meals on a student budget.",
+      action: (
+        <button className="btn" onClick={() => setTab("studentMeals")}>
+          Explore
+        </button>
+      )
+    },
+    {
+      key: "veganGalaxy",
+      title: "Vegan & Plant-Based Galaxy",
+      subtitle: "Protein-packed plant-based recipes.",
+      description: "All plant-based, grouped by protein.",
+      action: (
+        <button className="btn" onClick={() => setTab("veganGalaxy")}>
+          See Plant-Based
+        </button>
+      )
+    },
+    {
+      key: "buildARecipe",
+      title: "Build-a-Recipe",
+      subtitle: "Customize your own meal.",
+      description: "Create a recipe from your ingredients.",
+      action: (
+        <button className="btn" onClick={() => setTab("buildARecipe")}>
+          Start Building
+        </button>
+      )
+    }
+  ];
 
   // narrow tab lookup
   const currentSection = RECIPE_SECTIONS.find(s => s.key === tab);
@@ -500,12 +550,12 @@ function App() {
         minHeight: "100vh"
       }}
     >
-      {/* Navbar */}
+      {/* Navbar (now minimal for Bachelor Cooking brand) */}
       <nav
         className="navbar"
         style={{
           background: COLORS.primary,
-          color: "#fff",
+          color: "#222",
           position: "fixed",
           zIndex: 100,
           width: "100%",
@@ -515,107 +565,85 @@ function App() {
           boxShadow: "0 2px 8px #0002"
         }}
       >
-        <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <div
-            className="logo"
-            style={{ fontSize: 22, fontWeight: 700, letterSpacing: 1.2 }}
-          >
-            <span
-              className="logo-symbol"
-              style={{ color: COLORS.secondary, fontSize: 30, marginRight: 7 }}
-            >🍽️</span>
-            QuickBite Campus
-          </div>
-          <a href="#build" style={{ color: "#fff", textDecoration: "none", fontWeight: 400 }}>
-            <span style={{ border: "1px solid #fff7", padding: "6px 18px", borderRadius: 22, background: COLORS.accent, marginLeft: 12 }}>
-              Build-a-Recipe
-            </span>
-          </a>
+        <div
+          className="container"
+          style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}
+        >
+          <span
+            className="logo-symbol"
+            style={{ color: COLORS.secondary, fontSize: 32, marginRight: 14 }}
+          >🍽️</span>
+          <span style={{ fontSize: 21, fontWeight: 700, letterSpacing: 1.12, color: "#111" }}>
+            Bachelor Cooking
+          </span>
         </div>
       </nav>
 
       {/* Main content */}
-      <main style={{ paddingTop: 88, background: COLORS.background }}>
-        <div className="container" style={{ minHeight: 500 }}>
-          {/* Hero section with search */}
-          <div
-            className="hero"
-            style={{
-              paddingTop: 32,
-              paddingBottom: 18,
-              textAlign: "center",
-              alignItems: "center"
-            }}
-          >
-            <div
-              className="subtitle"
-              style={{ color: COLORS.secondary, fontSize: 19, fontWeight: 500 }}
-            >
-              Eat smart, fast, and delicious on campus.
-            </div>
-            <h1
-              className="title"
-              style={{ fontSize: 40, fontWeight: 800, color: COLORS.primary, margin: 0 }}
-            >
-              QuickBite Campus
+      <main style={{ paddingTop: 80, background: COLORS.background }}>
+        <div className="container" style={{ minHeight: 440 }}>
+          {/* New Top Title and Section Columns */}
+          <div style={{ paddingTop: "14px", textAlign: "center", marginBottom: 0 }}>
+            <h1 className="title">
+              Bachelor Cooking
             </h1>
-            <div
-              className="description"
-              style={{
-                color: "#333",
-                fontSize: 18,
-                margin: "8px 0 12px 0",
-                maxWidth: 540
-              }}
-            >
-              Discover easy student meals, plant-powered recipes, fast 5-ingredient dishes and create your own in minutes.
-            </div>
-            {/* Search bar */}
-            <div style={{
-              marginTop: 14,
-              marginBottom: 8,
-              width: "100%",
-              maxWidth: 420,
-              position: "relative",
-              display: "inline-block"
-            }}>
-              <input
-                type="text"
-                placeholder="🔍 Search recipes, tags, or ingredients…"
-                value={search}
-                onChange={e => setSearch(e.target.value)}
-                style={{
-                  width: "100%",
-                  borderRadius: 24,
-                  border: `1px solid #c5eedb`,
-                  padding: "13px 24px",
-                  fontSize: 16,
-                  background: "#fff",
-                  boxShadow: "0 1px 4px #0001",
-                  color: "#333",
-                  outline: "none",
-                  transition: "box-shadow 0.2s"
-                }}
-              />
-              {search && (
-                <button
-                  onClick={() => setSearch('')}
-                  style={{
-                    position: "absolute",
-                    right: 12,
-                    top: 10,
-                    background: "transparent",
-                    color: COLORS.primary,
-                    border: "none",
-                    fontWeight: 700,
-                    fontSize: 20,
-                    cursor: "pointer"
-                  }}
-                  title="Clear"
-                >⨯</button>
-              )}
+            <div className="top-section-columns">
+              {sectionColumns.map(col => (
+                <div className="section-col" key={col.key}>
+                  <div className="section-title">{col.title}</div>
+                  <div className="subtitle">{col.subtitle}</div>
+                  <div className="description">{col.description}</div>
+                  <div className="col-action">{col.action}</div>
+                </div>
+              ))}
             </div>
           </div>
+
+          {/* Search bar */}
+          <div style={{
+            margin: "6px auto 22px auto",
+            width: "100%",
+            maxWidth: 420,
+            position: "relative",
+            display: "block"
+          }}>
+            <input
+              type="text"
+              placeholder="🔍 Search recipes, tags, or ingredients…"
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              style={{
+                width: "100%",
+                borderRadius: 24,
+                border: `1.6px solid ${COLORS.primary}44`,
+                padding: "13px 24px",
+                fontSize: 16,
+                background: "#fff",
+                boxShadow: "0 1px 8px #fc3e",
+                color: "#333",
+                outline: "none",
+                transition: "box-shadow 0.2s"
+              }}
+            />
+            {search && (
+              <button
+                onClick={() => setSearch('')}
+                style={{
+                  position: "absolute",
+                  right: 12,
+                  top: 10,
+                  background: "transparent",
+                  color: COLORS.primary,
+                  border: "none",
+                  fontWeight: 700,
+                  fontSize: 20,
+                  cursor: "pointer"
+                }}
+                title="Clear"
+              >⨯</button>
+            )}
+          </div>
+
           {/* Tabs */}
           <Tabs
             sections={RECIPE_SECTIONS}
@@ -638,7 +666,7 @@ function App() {
         style={{
           width: "100%",
           background: COLORS.primary,
-          color: "#fff",
+          color: "#333",
           padding: "16px 0",
           textAlign: "center",
           borderTopLeftRadius: 16,
@@ -648,7 +676,7 @@ function App() {
           fontSize: 15
         }}
       >
-        © {new Date().getFullYear()} QuickBite Campus. Designed for students — Eat Quick, Think Big!
+        © {new Date().getFullYear()} Bachelor Cooking. Student meals, made bright!
       </footer>
     </div>
   );
