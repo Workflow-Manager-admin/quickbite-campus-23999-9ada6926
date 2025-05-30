@@ -985,7 +985,9 @@ function QuickBiteMainContainer() {
         </section>
       </div>
       <footer className="qbc-footer">
-        <span>Bachelors Cooking &copy; {new Date().getFullYear()} &mdash; Eat smart, live well.</span>
+        <span className="qbc-footer-line">
+          Bachelors Cooking &copy; 2025 &mdash; Eat smart, live well
+        </span>
       </footer>
 
       {/* Inline CSS for this component */}
@@ -1098,11 +1100,19 @@ function QuickBiteMainContainer() {
         }
         .qbc-footer {
           text-align: center;
-          padding: 18px 0;
-          color: #798580;
-          background: #F5F5F6;
-          font-size: 0.98rem;
+          padding: 18px 0 18px 0;
+          color: #886006;
+          background: #FFF8E1;
+          font-size: 1.02rem;
+          line-height: 1.6;
           margin-top: auto;
+          font-weight: 500;
+          letter-spacing: 0.01em;
+          border-top: 1.5px solid #FFECB3;
+          box-shadow: 0 -2px 8px #fff7e1;
+        }
+        .qbc-footer-line {
+          color: #A98109;
         }
         .qbc-empty { color: #BBB; font-style: italic; padding: 30px 0; text-align: center; }
         /* Recipe Card Styles */
