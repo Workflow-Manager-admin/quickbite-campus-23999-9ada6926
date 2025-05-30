@@ -1251,6 +1251,7 @@ const BUILD_A_RECIPE_TEMPLATES = [
 // UI Components
 
 function RecipeCard({ recipe, onViewDetails }) {
+  // No image rendered: Only title, ingredient count, tags, and up to first few ingredients
   return (
     <div style={{
       background: "#fff",
@@ -1264,12 +1265,6 @@ function RecipeCard({ recipe, onViewDetails }) {
       cursor: "pointer",
       border: "1.5px solid #ffc10722"
     }} onClick={onViewDetails}>
-      {recipe.image &&
-        <img
-          src={recipe.image}
-          alt={recipe.title}
-          style={{ width: "100%", height: 140, objectFit: "cover" }}
-        />}
       <div style={{ padding: 16 }}>
         <div style={{
           fontWeight: 600,
