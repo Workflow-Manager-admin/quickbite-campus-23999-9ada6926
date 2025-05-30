@@ -1,14 +1,14 @@
 import React, { useState, useMemo } from 'react';
 import './App.css';
 
-// Theme colors for QuickBite Campus
+// Theme colors for Bachelor Cooking (yellow-centric)
 const COLORS = {
-  primary: '#4CAF50',
-  secondary: '#FFC107',
-  accent: '#FF7043',
-  background: '#FAFAFA',
+  primary: '#FFC107',
+  secondary: '#FF7043',
+  accent: '#333',
+  background: '#FFFDEB',
   text: '#232323',
-  tagBg: '#F5F5F5'
+  tagBg: '#FFF9E3'
 };
 
 // Sample data for recipes (demo only)
