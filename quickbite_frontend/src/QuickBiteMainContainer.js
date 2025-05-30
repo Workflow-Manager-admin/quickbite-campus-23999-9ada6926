@@ -2,44 +2,39 @@ import React, { useState } from 'react';
 
 /**
  * Main Container for QuickBite Campus web app.
- * Card-based layout, sidebar/tabs navigation, search, build-a-recipe wizard.
- * Theme: light, primary color: #4CAF50, secondary: #FFC107, accent: #FF7043.
+ * Card-based layout, horizontal tab navigation, search, build-a-recipe wizard.
+ * Theme: light, primary color: #FFC107 (yellow), accent: #FF7043.
  */
 
-// Dummy recipe data for demonstration
+// Dummy recipe data for demonstration (NO IMAGES)
 const DEMO_RECIPES = [
   {
     id: 1,
     title: "Avocado Toast Deluxe",
-    image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80",
     ingredients: 5,
     tags: ["vegan", "quick"],
   },
   {
     id: 2,
     title: "One-Pan Spicy Pasta",
-    image: "https://images.unsplash.com/photo-1516684669134-de6f27e8b44b?auto=format&fit=crop&w=400&q=80",
     ingredients: 4,
     tags: ["student", "gluten-free"],
   },
   {
     id: 3,
     title: "Smashed Chickpea Salad",
-    image: "https://images.unsplash.com/photo-1464306076886-debca5e8a6b0?auto=format&fit=crop&w=400&q=80",
     ingredients: 5,
     tags: ["vegan", "protein-packed"],
   },
   {
     id: 4,
     title: "Egg Fried Rice",
-    image: "https://images.unsplash.com/photo-1506089676908-3592f7389d4d?auto=format&fit=crop&w=400&q=80",
     ingredients: 5,
     tags: ["student", "budget"],
   },
   {
     id: 5,
     title: "Tofu Stir-fry",
-    image: "https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400&q=80",
     ingredients: 4,
     tags: ["vegan", "gluten-free"],
   },
@@ -194,31 +189,28 @@ function QuickBiteMainContainer() {
   // Main render
   return (
     <div className="qbc-root">
+      {/* Horizontal navbar with tabs */}
       <nav className="qbc-navbar">
-        <div className="qbc-logo">🥗 QuickBite Campus</div>
+        <div className="qbc-logo">QuickBite Campus</div>
+        <div className="qbc-nav-tabs">
+          {SECTIONS.map(section =>
+            <button
+              key={section.key}
+              onClick={() => {
+                setActiveSection(section.key);
+                if (section.key === 'build') resetBuildRecipe();
+              }}
+              className={`qbc-nav-tab${activeSection === section.key ? ' active' : ''}`}
+              type="button"
+            >
+              {section.label}
+            </button>
+          )}
+        </div>
         <div className="qbc-tagline">Fast. Fresh. Student-Friendly.</div>
       </nav>
       <div className="qbc-main-layout">
-        {/* Navigation Sidebar or Tabs */}
-        <aside className="qbc-sidebar">
-          <nav>
-            {SECTIONS.map(section =>
-              <button
-                key={section.key}
-                onClick={() => {
-                  setActiveSection(section.key);
-                  if (section.key === 'build') resetBuildRecipe();
-                }}
-                className={`qbc-nav-btn${activeSection === section.key ? ' active' : ''}`}
-                type="button"
-              >
-                {section.label}
-              </button>
-            )}
-          </nav>
-        </aside>
-        
-        {/* Main content */}
+        {/* Main content (no left-hand sidebar) */}
         <section className="qbc-content">
           {/* Search bar for recipes sections only */}
           {activeSection !== 'build' && (
@@ -253,7 +245,7 @@ function QuickBiteMainContainer() {
             <div className="qbc-wizard">
               <h2 className="qbc-section-title">Build-a-Recipe</h2>
               <div className="qbc-section-desc">Create a custom recipe in just a few steps!</div>
-              <div className="qbc-wizard-step-indicator">{buildStep + 1} / {buildSteps.length}: <span style={{color: '#4CAF50', fontWeight: 600}}>{buildSteps[buildStep].label}</span></div>
+              <div className="qbc-wizard-step-indicator">{buildStep + 1} / {buildSteps.length}: <span style={{color: '#FFC107', fontWeight: 600}}>{buildSteps[buildStep].label}</span></div>
               <div className="qbc-wizard-step-content">
                 {buildSteps[buildStep].content}
               </div>
@@ -280,7 +272,7 @@ function QuickBiteMainContainer() {
         </section>
       </div>
       <footer className="qbc-footer">
-        <span>🍴 QuickBite Campus &copy; {new Date().getFullYear()} &mdash; Eat smart, live well.</span>
+        <span>QuickBite Campus &copy; {new Date().getFullYear()} &mdash; Eat smart, live well.</span>
       </footer>
 
       {/* Inline CSS for this component */}
@@ -294,49 +286,71 @@ function QuickBiteMainContainer() {
           flex-direction: column;
         }
         .qbc-navbar {
-          background: #4CAF50;
-          color: #fff;
-          padding: 18px 32px;
-          font-size: 1.35rem;
+          background: #FFC107;
+          color: #222;
+          padding: 0 0 0 0;
+          font-size: 1.18rem;
           font-weight: 700;
           display: flex;
           align-items: center;
           justify-content: space-between;
           letter-spacing: 0.02em;
-          box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+          box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+          position: sticky;
+          top: 0;
+          z-index: 99;
+          height: 74px;
         }
-        .qbc-logo { display: flex; align-items: center; gap: 8px; font-size: 1.35rem; }
-        .qbc-tagline { font-size: 0.9rem; color: #FFC107; font-weight: 500; }
+        .qbc-logo {
+          margin-left: 24px;
+          font-size: 1.32rem;
+          letter-spacing: 0.01em;
+          font-weight: 800;
+          color: #222;
+        }
+        .qbc-nav-tabs {
+          display: flex;
+          align-items: end;
+          height: 100%;
+          gap: 1px;
+        }
+        .qbc-nav-tab {
+          background: transparent;
+          border: none;
+          font-size: 1rem;
+          font-weight: 600;
+          color: #222;
+          padding: 20px 22px 12px 22px;
+          border-bottom: 5px solid transparent;
+          margin: 0;
+          transition: border-bottom 0.18s, color 0.17s, background 0.12s;
+          cursor: pointer;
+          border-radius: 0;
+        }
+        .qbc-nav-tab.active, .qbc-nav-tab:hover {
+          border-bottom: 5px solid #FF7043;
+          color: #FF7043;
+          background: rgba(255,193,7,0.08);
+        }
+        .qbc-tagline {
+          margin-right: 24px;
+          font-size: 0.99rem;
+          color: #886006;
+          font-weight: 500;
+          letter-spacing: 0.01em;
+        }
         .qbc-main-layout {
           display: flex;
           flex: 1 1 0;
           min-height: 0;
         }
-        .qbc-sidebar {
-          background: #fff;
-          min-width: 220px;
-          border-right: 1px solid #EFF0F3;
-          padding: 42px 14px 18px 8px;
-        }
-        .qbc-nav-btn {
-          background: none;
-          border: none;
-          display: block;
-          text-align: left;
-          font-size: 1.06rem;
-          font-weight: 600;
-          color: #4CAF50;
-          padding: 12px 12px 12px 24px;
-          margin-bottom: 6px;
-          border-radius: 4px 24px 24px 4px;
-          transition: background 0.18s;
-          cursor: pointer;
-        }
-        .qbc-nav-btn.active, .qbc-nav-btn:hover { background: #EFF8EF; color: #388e3c; }
         .qbc-content {
           flex: 1;
-          padding: 52px 24px 28px 24px;
+          padding: 44px 24px 28px 24px;
           min-height: 0;
+          max-width: 900px;
+          margin: 0 auto;
+          width: 100%;
         }
         .qbc-searchbar-container {
           margin-bottom: 16px;
@@ -352,16 +366,16 @@ function QuickBiteMainContainer() {
           outline: none;
           transition: border 0.2s;
         }
-        .qbc-searchbar:focus { border: 1.5px solid #4CAF50; }
+        .qbc-searchbar:focus { border: 1.5px solid #FFC107; }
         .qbc-section-title {
-          font-size: 1.75rem;
+          font-size: 1.65rem;
           font-weight: 700;
           margin-bottom: 4px;
           color: #FF7043;
         }
         .qbc-section-desc {
           color: #616161;
-          font-size: 1.09rem;
+          font-size: 1.07rem;
           margin-bottom: 16px;
         }
         .qbc-card-list {
@@ -382,7 +396,7 @@ function QuickBiteMainContainer() {
         .qbc-card {
           background: #fff;
           border-radius: 18px;
-          box-shadow: 0 2px 8px rgba(76,175,80,0.04), 0 1px 2px rgba(33,33,33,0.03);
+          box-shadow: 0 2px 8px rgba(255,193,7,0.06), 0 1px 2px rgba(33,33,33,0.03);
           display: flex;
           flex-direction: column;
           transition: transform 0.13s, box-shadow 0.13s;
@@ -390,25 +404,20 @@ function QuickBiteMainContainer() {
         }
         .qbc-card:hover {
           transform: scale(1.025);
-          box-shadow: 0 4px 16px rgba(76,175,80,0.11), 0 2px 6px rgba(33,33,33,0.08);
-        }
-        .qbc-card-img {
-          width: 100%;
-          height: 150px;
-          object-fit: cover;
+          box-shadow: 0 4px 16px rgba(255,193,7,0.15), 0 2px 6px rgba(33,33,33,0.08);
         }
         .qbc-card-body {
-          padding: 14px 18px 16px 18px;
+          padding: 20px 18px 16px 18px;
         }
         .qbc-card-title {
-          font-size: 1.13rem;
+          font-size: 1.12rem;
           margin: 0 0 4px 0;
           color: #222;
           font-weight: 600;
         }
         .qbc-card-meta {
           font-size: 0.97rem;
-          color: #717171;
+          color: #888;
           margin-bottom: 6px;
         }
         .qbc-tags {
@@ -418,24 +427,24 @@ function QuickBiteMainContainer() {
         }
         .qbc-tag {
           padding: 2.5px 10px;
-          background: #E8F5E9;
-          color: #4CAF50;
+          background: #FFFDE1;
+          color: #FFC107;
           border-radius: 15px;
           font-size: 0.87rem;
           margin-top: 4px;
           font-weight: 500;
         }
-        .qbc-tag.vegan { background: #E0F4E9; color: #12A15A; }
-        .qbc-tag.gluten-free { background: #FFF8E1; color: #FF7043;}
-        .qbc-tag.budget { background: #FFFDE1; color: #FFC107;}
+        .qbc-tag.vegan { background: #FFFDE1; color: #4D8E33; }
+        .qbc-tag.gluten-free { background: #EAF1FA; color: #FF7043;}
+        .qbc-tag.budget { background: #FFF8E1; color: #8B7B1C;}
         .qbc-tag.student { background: #E3F2FD; color: #1565c0;}
-        .qbc-tag['protein-packed'] { background: #FFEBEE; color: #4CAF50;}
+        .qbc-tag['protein-packed'] { background: #FFEBEE; color: #FFC107;}
         /* Build-a-Recipe Wizard */
         .qbc-wizard {
           max-width: 540px;
           margin: 0 auto;
           background: #fff;
-          box-shadow: 0 4px 18px #eafbe9;
+          box-shadow: 0 4px 18px #fff7e1;
           border-radius: 12px;
           padding: 42px 32px 30px 32px;
         }
@@ -452,18 +461,18 @@ function QuickBiteMainContainer() {
         }
         .qbc-btn-wizard {
           font-size: 0.99rem;
-          background: #EDF5EB;
-          border: 1.7px solid #4CAF50;
-          color: #388e3c;
+          background: #FFF8E1;
+          border: 1.7px solid #FFC107;
+          color: #B58C09;
           border-radius: 18px;
           padding: 7px 18px;
           cursor: pointer;
           transition: background 0.17s, color 0.17s, border 0.17s;
         }
         .qbc-btn-wizard.selected, .qbc-btn-wizard:hover {
-          background: #4CAF50;
+          background: #FFC107;
           color: #fff;
-          border: 1.7px solid #256027;
+          border: 1.7px solid #FF7043;
         }
         .qbc-wizard-actions {
           margin-top: 22px;
@@ -472,18 +481,22 @@ function QuickBiteMainContainer() {
           justify-content: flex-end;
         }
         .qbc-btn-primary {
-          background: #4CAF50;
-          color: #fff;
+          background: #FFC107;
+          color: #222;
           border: none;
           border-radius: 8px;
           font-size: 1.04rem;
           padding: 7px 20px;
           font-weight: 700;
           cursor: pointer;
+          transition: background 0.2s;
+        }
+        .qbc-btn-primary:hover {
+          background: #ffdf52; 
         }
         .qbc-btn-secondary {
-          background: #FFC107;
-          color: #444;
+          background: #FF7043;
+          color: #FFFDE1;
           border: none;
           border-radius: 8px;
           font-size: 1.03rem;
@@ -509,13 +522,14 @@ function QuickBiteMainContainer() {
         }
         .qbc-summary .dimmed { color: #BDBDBD; }
         @media (max-width: 900px) {
-          .qbc-main-layout { flex-direction: column;}
-          .qbc-sidebar { min-width: 100%; border-right: none; display: flex; flex-direction: row; gap: 4px; padding: 10px 0;}
-          .qbc-nav-btn { padding: 11px 6px 11px 10px; font-size: 1.01rem; border-radius: 4px 11px 11px 4px;}
-        }
-        @media (max-width: 600px) {
+          .qbc-navbar { flex-direction: column; height: auto; }
+          .qbc-nav-tabs { order: 2; width: 100%; justify-content: center; }
+          .qbc-logo, .qbc-tagline { order: 1; }
           .qbc-content { padding: 26px 3vw; }
           .qbc-wizard { padding: 25px 5vw 18px 5vw; }
+        }
+        @media (max-width: 600px) {
+          .qbc-content { padding: 17px 1vw;}
         }
       `}</style>
     </div>
@@ -524,12 +538,11 @@ function QuickBiteMainContainer() {
 
 /**
  * Recipe Card Component
- * @param {object} props - image, title, ingredient count, tags array
+ * @param {object} props - title, ingredient count, tags array (NO IMAGE)
  */
-function RecipeCard({ image, title, ingredients, tags }) {
+function RecipeCard({ title, ingredients, tags }) {
   return (
     <div className="qbc-card">
-      <img src={image} alt={title} className="qbc-card-img" />
       <div className="qbc-card-body">
         <div className="qbc-card-title">{title}</div>
         <div className="qbc-card-meta">{ingredients} ingredients</div>
