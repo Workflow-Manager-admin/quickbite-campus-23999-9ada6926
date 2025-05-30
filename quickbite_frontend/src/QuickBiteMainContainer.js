@@ -6,37 +6,74 @@ import React, { useState } from 'react';
  * Theme: light, primary color: #FFC107 (yellow), accent: #FF7043.
  */
 
-// Dummy recipe data for demonstration (NO IMAGES)
+/*
+ * Dummy recipe data for demonstration (NO IMAGES)
+ * Now includes a `steps` property for step-by-step recipe instructions.
+*/
 const DEMO_RECIPES = [
   {
     id: 1,
     title: "Avocado Toast Deluxe",
     ingredients: 5,
     tags: ["vegan", "quick"],
+    steps: [
+      "Toast two slices of bread until golden and crisp.",
+      "Halve an avocado, remove the pit, and scoop the flesh into a bowl.",
+      "Mash avocado with a pinch of salt and pepper.",
+      "Spread mashed avocado evenly over the toast.",
+      "Top with chili flakes and a drizzle of olive oil. Serve immediately."
+    ]
   },
   {
     id: 2,
     title: "One-Pan Spicy Pasta",
     ingredients: 4,
     tags: ["student", "gluten-free"],
+    steps: [
+      "Boil water in a large skillet and add your favorite pasta.",
+      "Once halfway cooked, add chopped veggies of choice and stir.",
+      "Mix in a spicy tomato sauce and simmer until pasta is cooked and sauce thickens.",
+      "Top with grated cheese or nutritional yeast before serving."
+    ]
   },
   {
     id: 3,
     title: "Smashed Chickpea Salad",
     ingredients: 5,
     tags: ["vegan", "protein-packed"],
+    steps: [
+      "Drain and rinse canned chickpeas.",
+      "Roughly mash chickpeas in a bowl with a fork or potato masher.",
+      "Add chopped celery, onion, and vegan mayo (or yogurt); mix well.",
+      "Season with lemon juice, salt, and black pepper to taste.",
+      "Serve on toast, in a wrap, or over greens."
+    ]
   },
   {
     id: 4,
     title: "Egg Fried Rice",
     ingredients: 5,
     tags: ["student", "budget"],
+    steps: [
+      "Heat oil in a nonstick skillet or wok over medium heat.",
+      "Add cooked rice and veggies; stir-fry for 1-2 minutes.",
+      "Push rice to the side and pour in beaten eggs, scrambling lightly.",
+      "Mix eggs into the rice and season with soy sauce.",
+      "Top with chopped green onions before serving."
+    ]
   },
   {
     id: 5,
     title: "Tofu Stir-fry",
     ingredients: 4,
     tags: ["vegan", "gluten-free"],
+    steps: [
+      "Cube tofu and pat dry with a paper towel.",
+      "Heat oil in a large pan and cook tofu until lightly browned.",
+      "Add sliced veggies (like peppers, broccoli) and stir-fry for another 3-4 minutes.",
+      "Pour in a simple sauce (soy or tamari, garlic, ginger, and a touch of sweetener).",
+      "Cook until veggies are just tender. Serve with rice or noodles."
+    ]
   },
 ];
 
