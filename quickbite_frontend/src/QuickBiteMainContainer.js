@@ -902,9 +902,9 @@ function QuickBiteMainContainer() {
   // Main render
   return (
     <div className="qbc-root">
-      {/* Horizontal navbar with tabs */}
-      <nav className="qbc-navbar">
-        <div className="qbc-logo">Bachelors Cooking</div>
+      {/* Centered title and below it horizontal navbar */}
+      <header className="qbc-header">
+        <h1 className="qbc-main-title">Bachelors Cooking</h1>
         <div className="qbc-nav-tabs">
           {SECTIONS.map(section =>
             <button
@@ -921,7 +921,7 @@ function QuickBiteMainContainer() {
           )}
         </div>
         <div className="qbc-tagline">Fast. Fresh. Student-Friendly.</div>
-      </nav>
+      </header>
       <div className="qbc-main-layout">
         {/* Main content (no left-hand sidebar) */}
         <section className="qbc-content">
